@@ -1,0 +1,13 @@
+/* user-details.component.css */
+.p-20 {
+    padding: 20px !important;
+}
+
+.error-container span{
+    display: block;
+    height: auto;
+    margin-bottom: 5px; 
+}
+  
+
+  
