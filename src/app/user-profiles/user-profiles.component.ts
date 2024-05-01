@@ -21,6 +21,8 @@ export class UserProfilesComponent implements OnInit {
   allowedTypes = ['image/png', 'image/jpeg']; // Allowed image types
 
   @ViewChild('modalCloseBtn') modalCloseBtn!: ElementRef;
+  @ViewChild("fileInput") fileInput!: ElementRef 
+
 
   constructor(
     private userProfileService: UserProfilesService,
@@ -54,7 +56,7 @@ export class UserProfilesComponent implements OnInit {
   }
 
   onFileSelected(event: any) {
-    this.selectedFile = null;
+    //this.selectedFile = null;
     const file: File = event.target.files[0];
     if (file && this.allowedTypes.includes(file.type)) {
       this.selectedFile = file;
@@ -68,7 +70,8 @@ export class UserProfilesComponent implements OnInit {
     } else {
       // Reset the selected file and show an error message
       this.selectedFile = null;
-      console.error('Please select a valid image file (PNG, JPEG, GIF)');
+      this.fileInput.nativeElement.value = '';
+      console.error('Please select a valid image file (PNG, JPEG)');
     }
   }
 
@@ -94,7 +97,7 @@ export class UserProfilesComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-        alert(error);
+        alert(JSON.stringify(error));
       }
     );
   }
@@ -126,7 +129,7 @@ export class UserProfilesComponent implements OnInit {
       }
     },(error) => {
       console.log(error);
-      alert(error);
+      alert(JSON.stringify(error));
     })
   }
 
@@ -144,10 +147,11 @@ export class UserProfilesComponent implements OnInit {
           this.getAllUsers();
           this.modalCloseBtn.nativeElement.click();
           this.selectedFile = null;
+          this.fileInput.nativeElement.value = '';
         }
       }, (error) => {
         console.log(error);
-        alert(error);
+        alert(JSON.stringify(error));
       })
     }
     else{
@@ -158,10 +162,11 @@ export class UserProfilesComponent implements OnInit {
           this.modalCloseBtn.nativeElement.click();
           this.selectedUserUniqueId = '';
           this.selectedFile = null;
+          this.fileInput.nativeElement.value = '';
         }
       }, (error) => {
         console.log(error);
-        alert(error);
+        alert(JSON.stringify(error));
       })
     }
   }
